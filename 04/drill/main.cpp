@@ -6,8 +6,8 @@ int main() {
   std::cout << "Please enter two integers (CMD + D or | to terminate):"
             << std::endl;
 
-  int input_01;
-  int input_02;
+  double input_01;
+  double input_02;
 
   while((std::cin >> input_01 && std::cin >> input_02)
             && (input_01 != '|') && input_02 != '|') {

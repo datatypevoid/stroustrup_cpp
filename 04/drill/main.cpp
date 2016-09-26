@@ -18,6 +18,9 @@ int main() {
     } else if (input_01 < input_02) {
       std::cout << "The smaller value is: " << input_01 << std::endl;
       std::cout << "The larger value is: " << input_02 << std::endl;
+    } else if (input_01 == input_02) {
+      std::cout << "The value " << input_01 << " is equal to value "
+                << input_02 << std::endl;
     }
   }
   return 0;

@@ -16,7 +16,7 @@ int main() {
   std::cout << "\nCalculating the square root of " << input << " ...\n"
             << std::endl;
 
-  result = square(44);
+  result = square(input);
 
   std::cout << "The square of " << input << " is " << result
             << std::endl;

@@ -11,6 +11,11 @@ int main() {
 
   constexpr int uppercase_starting_index = 224;
 
+  constexpr int digit_starting_index = 207;
+
+  constexpr int digit_ending_index = 216;
+
+
   std::cout << "\nPrinting lowercase characters [a - z] : \n"
             << std::endl;
 
@@ -29,7 +34,7 @@ int main() {
 
   std::cout << "\nPrinting standard digits [0 - 9] : \n" << std::endl;
 
-  for(int i = 207; i <= 216; i++) {
+  for(int i = digit_starting_index; i <= digit_ending_index; i++) {
     std::cout << char('a' + i) << "\t" << i << std::endl;
   }
 }

@@ -5,12 +5,12 @@
 
 int main() {
 
-    int i = 0;
+  int i = 0;
 
-    constexpr int limit = 30;
+  constexpr int limit = 30;
 
-    while(i <= limit) {
-        std::cout << char('a' + i) << "\t" << i << std::endl;
-        ++i;
-    }
+  while(i <= limit) {
+    std::cout << char('a' + i) << "\t" << i << std::endl;
+    ++i;
+  }
 }

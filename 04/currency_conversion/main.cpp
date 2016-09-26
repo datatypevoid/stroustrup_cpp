@@ -1,6 +1,6 @@
 // Chapter 4 Try This - Currency Conversion
 
-#include "../../std_lib_facilities.h"
+#include <iostream>
 
 int main() {
 
@@ -11,15 +11,15 @@ int main() {
     double amount = 1;
     char currency = ' ';
 
-    cout << "Please enter an amount followed by a currency [(y)en, (e)uro, or (p)ound]:\n";
-    cin >> amount >> currency;
+    std::cout << "Please enter an amount followed by a currency [(y)en, (e)uro, or (p)ound]:\n";
+    std::cin >> amount >> currency;
 
     if (currency == 'y')
-        cout << amount << " yen == " << yen_per_dollar * amount << " dollars\n";
+        std::cout << amount << " yen == " << yen_per_dollar * amount << " dollars\n";
     else if (currency == 'e')
-        cout << amount << " euros == " << euro_per_dollar * amount << " dollars\n";
+        std::cout << amount << " euros == " << euro_per_dollar * amount << " dollars\n";
     else if (currency == 'p')
-        cout << amount << " pounds == " << pounds_per_dollar * amount << " dollars\n";
+        std::cout << amount << " pounds == " << pounds_per_dollar * amount << " dollars\n";
     else
-        cout << "Sorry, I don't know a currency called '" << currency << "'\n";
+        std::cout << "Sorry, I don't know a currency called '" << currency << "'\n";
 }

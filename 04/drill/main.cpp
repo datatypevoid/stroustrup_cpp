@@ -24,20 +24,21 @@ std::vector<std::string> const valid_units = { "cm",
 
 int main() {
 
-  double input = int();
+  double input = double();
   std::string unit = std::string();
 
   std::vector<double> v = {};
 
-  double largest_value = int();
-  double smallest_value = int();
+  double largest_value = double();
+  double smallest_value = double();
+  double sum = double();
 
   bool first_run = true;
 
   display_instruction();
 
   while(std::cin >> input >> unit && input != '|') {
-    if(!contains(unit, valid_units)) {
+    if (!contains(unit, valid_units)) {
       std::cout << "The unit '" << unit << "' is not a recognized "
                 << "unit. Please try again." << std::endl;
     } else {
@@ -46,7 +47,7 @@ int main() {
 
       v.push_back(input_as_meters);
 
-      if(first_run) {
+      if (first_run) {
         smallest_value = input_as_meters;
         largest_value = input_as_meters;
         first_run = false;
@@ -55,21 +56,35 @@ int main() {
                   << std::endl;
       }
 
-      if(input_as_meters > largest_value) {
+      if (input_as_meters > largest_value) {
         largest_value = input_as_meters;
         std::cout << "The value " << input << unit << " ("
                   << input_as_meters << valid_units[1] << ")" << " is"
-                  << " the largest input " << "so far." << std::endl;
-      } else if(input_as_meters < smallest_value) {
+                  << " the largest input so far." << std::endl;
+      } else if (input_as_meters < smallest_value) {
         smallest_value = input_as_meters;
         std::cout << "The value " << input << unit << " ("
                   << input_as_meters << valid_units[1] << ")" << " is"
-                  << " the smallest input " << "so far." << std::endl;
+                  << " the smallest input so far." << std::endl;
       }
+
+      sum += input_as_meters;
     }
 
     display_instruction();
   }
+
+  std::cout << "The sum of all values entered totals to: " << sum
+            << valid_units[1] << std::endl;
+
+  std::cout << "The value " << smallest_value << " "
+            << valid_units[1] << " is the smallest input entered."
+            << std::endl;
+
+  std::cout << "The value " << largest_value << " " << valid_units[1]
+            << " is the largest input entered." << std::endl;
+
+  std::cout << "Number of values inputted: " << v.size();
 
   return 0;
 }

@@ -6,33 +6,39 @@ double calculate_percentage_difference(double x, double y);
 
 int main() {
 
-  std::cout << "Please enter two integers (CMD + D or | to terminate):"
+  double input = 0;
+
+  double largest_value = 0;
+  double smallest_value = 0;
+
+  bool first_run = true;
+
+  std::cout << "Please enter a number (CMD + D or | to terminate):"
             << std::endl;
 
-  double input_01;
-  double input_02;
+  while(std::cin >> input && input != '|') {
 
-  double constexpr percent_difference_threshold = 1;
+    if(first_run) {
+      smallest_value = input;
+      largest_value = input;
+      first_run = false;
+      std::cout << "Your initial input: " << input << std::endl;
+    }
 
-  while((std::cin >> input_01 && std::cin >> input_02)
-            && (input_01 != '|') && input_02 != '|') {
-    if(input_01 > input_02) {
-      std::cout << "The smaller value is: " << input_02 << std::endl;
-      std::cout << "The larger value is: " << input_01 << std::endl;
-    } else if (input_01 < input_02) {
-      std::cout << "The smaller value is: " << input_01 << std::endl;
-      std::cout << "The larger value is: " << input_02 << std::endl;
-    } else if (input_01 == input_02) {
-      std::cout << "The value " << input_01 << " is equal to value "
-                << input_02 << std::endl;
+    if(input > largest_value) {
+      largest_value = input;
+      std::cout << "The value " << input << " is the largest input "
+                << "so far." << std::endl;
+    } else if(input < smallest_value) {
+      smallest_value = input;
+      std::cout << "The value " << input << " is the smallest input "
+                << "so far." << std::endl;
     }
-    if(calculate_percentage_difference(input_01, input_02)
-         <= percent_difference_threshold) {
-      std::cout << "The numbers are within one percent of each other"
-                << std::endl;
-    }
+
+    std::cout << "Please enter a number (CMD + D or | to terminate):"
+              << std::endl;
   }
-  
+
   return 0;
 }
 

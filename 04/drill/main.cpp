@@ -27,7 +27,7 @@ int main() {
   double input = double();
   std::string unit = std::string();
 
-  std::vector<double> v = {};
+  std::vector<double> converted_inputs = {};
 
   double largest_value = double();
   double smallest_value = double();
@@ -39,13 +39,15 @@ int main() {
 
   while(std::cin >> input >> unit && input != '|') {
     if (!contains(unit, valid_units)) {
-      std::cout << "The unit '" << unit << "' is not a recognized "
-                << "unit. Please try again." << std::endl;
+      std::cout << "The unit '" << unit << "' is not recognized. "
+                << "Please try again." << std::endl;
+      std::cout << "\nValid representations of units are:"
+                << "\n\tcm\n\tm\n\tin\n\tft\n" << std::endl;
     } else {
 
       double input_as_meters = process_input(input, unit);
 
-      v.push_back(input_as_meters);
+      converted_inputs.push_back(input_as_meters);
 
       if (first_run) {
         smallest_value = input_as_meters;
@@ -74,25 +76,31 @@ int main() {
     display_instruction();
   }
 
-  sort(v.begin(), v.end());
+  if(!first_run) {
 
-  std::cout << "Values entered: " << std::endl;
+    sort(converted_inputs.begin(), converted_inputs.end());
 
-  for (int i = 0; i < v.size(); ++i) {
-    std::cout << "\t" << v[i] << " " << valid_units[1] << std::endl;
+    std::cout << "\nValues entered:\n" << std::endl;
+
+    for (int i = 0; i < converted_inputs.size(); ++i) {
+      std::cout << "\t" << converted_inputs[i] << " " << valid_units[1] << std::endl;
+    }
+
+    std::cout << "\nThe sum of all values entered totals to: " << sum
+              << " " << valid_units[1] << std::endl;
+
+    std::cout << "The value " << smallest_value << " "
+              << valid_units[1] << " is the smallest input entered."
+              << std::endl;
+
+    std::cout << "The value " << largest_value << " " << valid_units[1]
+              << " is the largest input entered." << std::endl;
+
+    std::cout << "Number of values input: " << converted_inputs.size()
+              << std::endl;
   }
 
-  std::cout << "The sum of all values entered totals to: " << sum
-            << " " << valid_units[1] << std::endl;
-
-  std::cout << "The value " << smallest_value << " "
-            << valid_units[1] << " is the smallest input entered."
-            << std::endl;
-
-  std::cout << "The value " << largest_value << " " << valid_units[1]
-            << " is the largest input entered." << std::endl;
-
-  std::cout << "Number of values inputted: " << v.size();
+  std::cout << "\nProcess terminating..." << std::endl;
 
   return 0;
 }
@@ -134,8 +142,8 @@ bool contains(std::string input,
  * Displays the instruction message to the user
  */
 void display_instruction() {
-  std::cout << "Please enter a number (CMD + D or | to terminate):"
-            << std::endl;
+  std::cout << "Please enter a measurement { ex: 4 cm, 12 m, 14 in, "
+      "16 ft } (CMD + D or | to terminate):" << std::endl;
 }
 
 /**

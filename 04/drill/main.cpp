@@ -4,39 +4,71 @@
 
 double calculate_percentage_difference(double x, double y);
 
+bool contains(std::string input,
+              std::vector<std::string> v);
+
+double centimeters_to_meters(double x);
+
+void display_instruction();
+
+double feet_to_inches(double x);
+
+double inches_to_centimeters(double x);
+
+double process_input(double input, std::string unit);
+
+std::vector<std::string> const valid_units = { "cm",
+                                               "m",
+                                               "in",
+                                               "ft" };
+
 int main() {
 
-  double input = 0;
+  double input = int();
+  std::string unit = std::string();
 
-  double largest_value = 0;
-  double smallest_value = 0;
+  std::vector<double> v = {};
+
+  double largest_value = int();
+  double smallest_value = int();
 
   bool first_run = true;
 
-  std::cout << "Please enter a number (CMD + D or | to terminate):"
-            << std::endl;
+  display_instruction();
 
-  while(std::cin >> input && input != '|') {
+  while(std::cin >> input >> unit && input != '|') {
+    if(!contains(unit, valid_units)) {
+      std::cout << "The unit '" << unit << "' is not a recognized "
+                << "unit. Please try again." << std::endl;
+    } else {
 
-    if(first_run) {
-      smallest_value = input;
-      largest_value = input;
-      first_run = false;
-      std::cout << "Your initial input: " << input << std::endl;
+      double input_as_meters = process_input(input, unit);
+
+      v.push_back(input_as_meters);
+
+      if(first_run) {
+        smallest_value = input_as_meters;
+        largest_value = input_as_meters;
+        first_run = false;
+        std::cout << "Your initial input: " << input << unit << " ("
+                  << input_as_meters << valid_units[1] << ")"
+                  << std::endl;
+      }
+
+      if(input_as_meters > largest_value) {
+        largest_value = input_as_meters;
+        std::cout << "The value " << input << unit << " ("
+                  << input_as_meters << valid_units[1] << ")" << " is"
+                  << " the largest input " << "so far." << std::endl;
+      } else if(input_as_meters < smallest_value) {
+        smallest_value = input_as_meters;
+        std::cout << "The value " << input << unit << " ("
+                  << input_as_meters << valid_units[1] << ")" << " is"
+                  << " the smallest input " << "so far." << std::endl;
+      }
     }
 
-    if(input > largest_value) {
-      largest_value = input;
-      std::cout << "The value " << input << " is the largest input "
-                << "so far." << std::endl;
-    } else if(input < smallest_value) {
-      smallest_value = input;
-      std::cout << "The value " << input << " is the smallest input "
-                << "so far." << std::endl;
-    }
-
-    std::cout << "Please enter a number (CMD + D or | to terminate):"
-              << std::endl;
+    display_instruction();
   }
 
   return 0;
@@ -50,4 +82,79 @@ int main() {
  */
 double calculate_percentage_difference(double x, double y) {
   return (std::abs(x - y) / ((x + y) / 2)) * 100;
+}
+
+/**
+ * Converts a value in centimeters to meters
+ * @param x - input in centimeters
+ * @return double - value converted to meters
+ */
+double centimeters_to_meters(double x) {
+
+  double constexpr centimeters_per_meter = 100;
+
+  return x / centimeters_per_meter;
+}
+
+/**
+ * Checks if a vector contains a string
+ * @param input - string subject to check
+ * @param v - vector containing strings to check our input against
+ * @return bool - whether or not the vector contains the given string
+ */
+bool contains(std::string input,
+              std::vector<std::string> v) {
+  return v.end() != std::find(v.begin(), v.end(), input);
+}
+
+/**
+ * Displays the instruction message to the user
+ */
+void display_instruction() {
+  std::cout << "Please enter a number (CMD + D or | to terminate):"
+            << std::endl;
+}
+
+/**
+ * Converts a value in feet to inches
+ * @param x - input in feet
+ * @return double - value converted to inches
+ */
+double feet_to_inches(double x) {
+
+  double constexpr inches_per_feet = 12;
+
+  return x * inches_per_feet;
+}
+
+/**
+ * Converts a value in inches to centimeters
+ * @param x - input in inches
+ * @return double - value converted to centimeters
+ */
+double inches_to_centimeters(double x) {
+
+  double constexpr centimeters_per_inch = 2.54;
+
+  return x * centimeters_per_inch;
+}
+
+double process_input(double input, std::string unit) {
+
+  double input_as_meters = double();
+
+  if(unit == valid_units[0]) {
+    input_as_meters = centimeters_to_meters(input);
+  } else if(unit == valid_units[1]) {
+    input_as_meters = input;
+  } else if(unit == valid_units[2]) {
+    input_as_meters = centimeters_to_meters(
+        inches_to_centimeters(input));
+  } else if(unit == valid_units[3]) {
+    input_as_meters = centimeters_to_meters(
+        inches_to_centimeters(
+            feet_to_inches(input)));
+  }
+
+  return input_as_meters;
 }

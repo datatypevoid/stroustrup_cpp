@@ -51,21 +51,21 @@ int main() {
         smallest_value = input_as_meters;
         largest_value = input_as_meters;
         first_run = false;
-        std::cout << "Your initial input: " << input << unit << " ("
-                  << input_as_meters << valid_units[1] << ")"
-                  << std::endl;
+        std::cout << "Your initial input: " << input << " " << unit
+                  << " (" << input_as_meters << " " << valid_units[1]
+                  << ")" << std::endl;
       }
 
       if (input_as_meters > largest_value) {
         largest_value = input_as_meters;
-        std::cout << "The value " << input << unit << " ("
-                  << input_as_meters << valid_units[1] << ")" << " is"
-                  << " the largest input so far." << std::endl;
+        std::cout << "The value " << input << " " << unit << " ("
+                  << input_as_meters << " " << valid_units[1] << ")"
+                  << " is the largest input so far." << std::endl;
       } else if (input_as_meters < smallest_value) {
         smallest_value = input_as_meters;
-        std::cout << "The value " << input << unit << " ("
-                  << input_as_meters << valid_units[1] << ")" << " is"
-                  << " the smallest input so far." << std::endl;
+        std::cout << "The value " << input << " " << unit << " ("
+                  << input_as_meters << " " << valid_units[1] << ")"
+                  << " is the smallest input so far." << std::endl;
       }
 
       sum += input_as_meters;
@@ -74,8 +74,16 @@ int main() {
     display_instruction();
   }
 
+  sort(v.begin(), v.end());
+
+  std::cout << "Values entered: " << std::endl;
+
+  for (int i = 0; i < v.size(); ++i) {
+    std::cout << "\t" << v[i] << " " << valid_units[1] << std::endl;
+  }
+
   std::cout << "The sum of all values entered totals to: " << sum
-            << valid_units[1] << std::endl;
+            << " " << valid_units[1] << std::endl;
 
   std::cout << "The value " << smallest_value << " "
             << valid_units[1] << " is the smallest input entered."
